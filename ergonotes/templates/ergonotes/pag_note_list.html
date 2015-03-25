@@ -1,0 +1,31 @@
+{% extends 'ergonotes/base.html' %}
+{% load i18n %}
+
+{% block content %}
+  <section class="content" role="application">
+    <table class="width-full">
+      <thead>
+        <tr>
+          <th class="width-6r">{% trans 'Priority' %}</th>
+          <th>{% trans 'Note' %}</th>
+          <th class="width-6r show-for-medium-up">{% trans 'Show on Home?' %}</th>
+          <th class="show-for-medium-up">{% trans 'Text' %}</th>
+          <th class="width-6r show-for-large-up">{% trans 'Format' %}</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for note in notes %}
+          <tr>
+            <td>{{ note.get_priority_display }}</td>
+            <td><a href="{% url 'ergonotes:note_edit' note.pk %}">{{ note.title }}</a></td>
+            <td class="show-for-medium-up"><a href="{% url 'ergonotes:note_changehome' note.pk %}">
+                {% if note.show_on_home %}{% trans 'Yes' %}{% else %}{% trans 'No' %}{% endif %}
+            </a></td>
+            <td class="show-for-medium-up">{{ note.get_text_display }}</td>
+            <td class="show-for-large-up">{{ note.get_format_type_display }}</td>
+          </tr>
+        {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

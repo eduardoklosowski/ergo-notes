@@ -1,0 +1,22 @@
+{% extends 'ergohome/base.html' %}
+{% load i18n %}
+{% load staticfiles %}
+
+
+{% block title %}{{ block.super }} {% trans 'Notes' %}{% endblock %}
+
+{% block css %}
+  {{ block.super }}
+  <link rel="stylesheet" href="{% static 'ergonotes/css/app.css' %}">
+{% endblock %}
+
+
+{% block top-bar-left %}
+  <li class="has-dropdown">
+    <a href="{% url 'ergonotes:note_list' %}">{% trans 'Notes' %}</a>
+    <ul class="dropdown">
+      <li><a href="{% url 'ergonotes:note_list' %}">{% trans 'List' %}</a></li>
+      <li><a href="{% url 'ergonotes:note_add' %}">{% trans 'New' %}</a></li>
+    </ul>
+  </li>
+{% endblock %}
