@@ -7,20 +7,7 @@
   <section role="application" class="content">
     <form method="post">
       {% csrf_token %}
-      {% foundation_form_hiddens form %}
-      {% foundation_form_errors form %}
-
-      <div class="row">
-        <div class="small-12 columns">{% foundation_form_field form.title %}</div>
-      </div>
-      <div class="row">
-        <div class="small-6 medium-4 columns">{% foundation_form_field form.priority %}</div>
-        <div class="small-6 medium-4 columns">{% foundation_form_field form.show_on_home %}</div>
-        <div class="small-12 medium-4 columns">{% foundation_form_field form.format_type %}</div>
-      </div>
-      <div class="row">
-        <div class="small-12 columns">{% foundation_form_field form.text %}</div>
-      </div>
+      {{ form.as_foundation }}
       <div class="row">
         {% if note %}
           <div class="small-12 medium-6 columns small-text-center medium-text-left">
