@@ -10,12 +10,13 @@ from django.utils.translation import ugettext as _
 
 from .forms import NoteForm
 from .models import Note, NOTE_FORMAT_TYPE
+from .tables import NoteTable
 
 
 @login_required
 def note_list(request):
     return render(request, 'ergonotes/pag_note_list.html', {
-        'notes': Note.objects.filter(user=request.user),
+        'notes': NoteTable(data=Note.objects.filter(user=request.user)),
     })
 
 
