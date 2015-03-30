@@ -14,18 +14,12 @@ class NoteTable(Table):
                 'value': lambda x: x.get_priority_display()},
 
                {'name': _('Note'),
-                'value': lambda x: mark_safe('<a href="%s">%s</a>' % (
-                    x.get_absolute_url(),
-                    x.title,
-                ))},
+                'value': lambda x: x.get_linkdisplay()},
 
                {'name': _('Show on Home?'),
                 'class': 'show-for-medium-up',
                 'header_class': 'width-6r',
-                'value': lambda x: mark_safe('<a href="%s">%s</a>' % (
-                    reverse('ergonotes:note_changehome', args=(x.pk,)),
-                    _('Yes') if x.show_on_home else _('No'),
-                ))},
+                'value': lambda x: x.get_show_on_home_linkdisplay()},
 
                {'name': _('Text'),
                 'class': 'show-for-medium-up',

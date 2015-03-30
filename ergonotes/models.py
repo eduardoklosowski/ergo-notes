@@ -51,6 +51,18 @@ class Note(models.Model):
     def get_absolute_url(self):
         return reverse('ergonotes:note_edit', kwargs={'pk': self.pk})
 
+    def get_linkdisplay(self):
+        return mark_safe('<a href="%s">%s</a>' % (self.get_absolute_url(), self.title))
+
+    def get_show_on_home_display(self):
+        if self.show_on_home:
+            return _('Yes')
+        return _('No')
+
+    def get_show_on_home_linkdisplay(self):
+        return mark_safe('<a href="%s">%s</a>' % (reverse('ergonotes:note_changehome', args=(self.pk,)),
+                                                  self.get_show_on_home_display()))
+
     def get_text_display(self):
         if self.format_type == 'plain':
             return linebreaksbr(self.text)
