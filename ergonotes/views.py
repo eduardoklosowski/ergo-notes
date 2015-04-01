@@ -7,6 +7,7 @@ from django.contrib.auth.decorators import login_required
 from django.http import HttpResponse
 from django.shortcuts import get_object_or_404, redirect, render
 from django.utils.translation import ugettext as _
+from ergo.genericview import DeleteView
 
 from .forms import NoteForm
 from .models import Note, NOTE_FORMAT_TYPE
@@ -53,19 +54,21 @@ def note_changehome(request, pk):
     return redirect('ergonotes:note_list')
 
 
-@login_required
-def note_delete(request, pk):
-    note = get_object_or_404(Note, user=request.user, pk=pk)
-    if request.GET.get('confirm', '') == 'y':
-        note.delete()
-        messages.add_message(request, messages.INFO, _('Note "%(title)s" deleted') % {
-            'title': note.title,
-        })
-        return redirect('ergonotes:note_list')
-    return render(request, 'ergohome/pag_delete.html', {
-        'template': 'ergonotes/base.html',
-        'title': _('Delete note "%(title)s"?') % {'title': note.title}
-    })
+class NoteDeleteView(DeleteView):
+    model = Note
+    template = 'ergonotes/base.html'
+    message = _('Delete note "%(title)s"?')
+    message_deleted = _('Note "%(title)s" deleted')
+    redirect = 'ergonotes:note_list'
+
+    def title(self, note):
+        return note.title
+
+    def make_filter(self, request, pk):
+        return {'user': request.user, 'pk': pk}
+
+
+note_delete = NoteDeleteView.as_view()
 
 
 @login_required
