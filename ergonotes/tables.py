@@ -21,7 +21,7 @@ class NoteTable(Table):
 
                {'name': _('Text'),
                 'class': 'show-for-medium-up',
-                'value': lambda x: x.get_text_display()},
+                'value': lambda x: x.get_text_displaybox()},
 
                {'name': _('Format'),
                 'class': 'show-for-large-up',

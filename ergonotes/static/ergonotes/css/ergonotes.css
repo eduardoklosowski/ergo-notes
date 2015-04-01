@@ -1,3 +1,8 @@
 .width-6r {
   width: 6rem;
 }
+
+.note-box {
+  max-height: 15rem;
+  overflow: auto;
+}

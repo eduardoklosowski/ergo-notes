@@ -72,6 +72,9 @@ class Note(models.Model):
 
         return self.text
 
+    def get_text_displaybox(self):
+        return mark_safe('<div class="note-box">%s</div>' % self.get_text_display())
+
     def get_count(self):
         if self.format_type == 'rst':
             tree = publish_doctree(self.text)
