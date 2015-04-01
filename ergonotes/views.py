@@ -15,8 +15,9 @@ from .tables import NoteTable
 
 @login_required
 def note_list(request):
-    return render(request, 'ergonotes/pag_note_list.html', {
-        'notes': NoteTable(data=Note.objects.filter(user=request.user)),
+    return render(request, 'ergohome/pag_list.html', {
+        'template': 'ergonotes/base.html',
+        'list': NoteTable(data=Note.objects.filter(user=request.user)),
     })
 
 
@@ -38,7 +39,7 @@ def note_form(request, pk=None):
             return redirect(instance)
     else:
         form = NoteForm(instance=note)
-    return render(request, 'ergonotes/pag_note_form.html', {
+    return render(request, 'ergonotes/note_form.html', {
         'form': form,
         'note': note,
     })
@@ -61,7 +62,8 @@ def note_delete(request, pk):
             'title': note.title,
         })
         return redirect('ergonotes:note_list')
-    return render(request, 'ergonotes/pag_delete.html', {
+    return render(request, 'ergohome/pag_delete.html', {
+        'template': 'ergonotes/base.html',
         'title': _('Delete note "%(title)s"?') % {'title': note.title}
     })
 
