@@ -21,3 +21,11 @@
 from django.contrib import admin
 
 from . import models
+
+
+@admin.register(models.Note)
+class NoteAdmin(admin.ModelAdmin):
+    list_display = ('user', 'priority', 'title', 'show_on_home', 'create_on', 'modify_on', 'markup')
+    list_display_links = ('title',)
+    list_filter = ('priority', 'markup')
+    search_fields = ('=user', 'title')
