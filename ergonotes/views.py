@@ -19,3 +19,14 @@
 #
 
 from __future__ import unicode_literals
+
+from ergo.views import LoginRequiredMixin
+from userviews import views as userviews
+
+from . import models
+
+
+# Note
+
+class NoteListView(LoginRequiredMixin, userviews.UserListView):
+    model = models.Note

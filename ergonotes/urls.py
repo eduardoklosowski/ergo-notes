@@ -24,6 +24,7 @@ from . import views
 
 
 url_list = [
+    url(r'^list/$', views.NoteListView.as_view(), name='note_list'),
 ]
 
 urlpatterns = [

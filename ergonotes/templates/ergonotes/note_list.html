@@ -1,0 +1,32 @@
+{% extends 'ergonotes/base.html' %}
+
+
+{% block title %}Notas - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+  <section class="content" role="application">
+    <table class="width-full">
+      <thead>
+        <tr>
+          <th class="width-6r">Prioridade</th>
+          <th>Título</th>
+          <th class="width-6r show-for-large-up">Mostrar no home?</th>
+          <th class="show-for-medium-up">Texto</th>
+          <th class="width-6r show-for-large-up">Markup</th>
+        </tr>
+      </thead>
+      <tbody>
+        {% for note in note_list %}
+          <tr>
+            <td>{{ note.get_priority_display }}</td>
+            <td><a href="{{ note.get_absolute_url }}">{{ note.title }}</a></td>
+            <td class="show-for-large-up">{{ note.get_show_on_home_display }}</td>
+            <td class="show-for-medium-up"><div class="note-box">{{ note.get_text_display }}</div></td>
+            <td class="show-for-large-up">{{ note.get_markup_display }}</td>
+          </tr>
+          {% endfor %}
+      </tbody>
+    </table>
+  </section>
+{% endblock %}

@@ -15,5 +15,12 @@
 {% block top-bar-left %}
   <ul class="left">
     <li class="divider"></li>
+    <li class="has-dropdown">
+      <a href="{% url 'ergonotes:note_list' %}">Notas</a>
+      <ul class="dropdown">
+        <li><a href="{% url 'ergonotes:note_list' %}">Todas</a></li>
+      </ul>
+    </li>
+    <li class="divider"></li>
   </ul>
 {% endblock %}

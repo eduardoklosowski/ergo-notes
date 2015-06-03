@@ -1,0 +1,4 @@
+.note-box {
+  max-height: 15rem;
+  overflow: auto;
+}
