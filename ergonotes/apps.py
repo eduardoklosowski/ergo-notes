@@ -19,6 +19,7 @@
 #
 
 from django.apps import AppConfig
+from django.core.urlresolvers import reverse_lazy
 
 
 class ErgoNotesConfig(AppConfig):
@@ -26,3 +27,7 @@ class ErgoNotesConfig(AppConfig):
     verbose_name = 'Ergo Notes'
     ergo_url = 'ergonotes'
     ergo_index = 'ergonotes:note_list'
+    ergo_menu_links = (
+        ('Listar Notas', reverse_lazy('ergonotes:note_list')),
+        ('Nova Nota', reverse_lazy('ergonotes:note_add')),
+    )
