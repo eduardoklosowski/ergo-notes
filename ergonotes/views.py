@@ -30,3 +30,7 @@ from . import models
 
 class NoteListView(LoginRequiredMixin, userviews.UserListView):
     model = models.Note
+
+
+class NoteDetailView(LoginRequiredMixin, userviews.UserDetailView):
+    model = models.Note

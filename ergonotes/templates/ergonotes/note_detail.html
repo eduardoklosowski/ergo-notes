@@ -1,0 +1,48 @@
+{% extends 'ergonotes/base.html' %}
+
+
+{% block title %}{{ note }} - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+  <section class="content" role="application">
+    <div class="row">
+      <div class="small-12 columns">
+        <h1>{{ note }}</h1>
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <b>Prioridade:</b> {{ note.get_priority_display }}
+      </div>
+      <div class="small-12 medium-6 columns">
+        <b>Markup:</b> {{ note.get_markup_display }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <b>Criado em:</b> {{ note.create_on }}
+      </div>
+      <div class="small-12 medium-6 columns">
+        <b>Atualizado em:</b> {{ note.modify_on }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 medium-6 columns">
+        <b>Itens:</b> {{ note.get_count|default_if_none:'-' }}
+      </div>
+      <div class="small-12 medium-6 columns">
+        <b>Mostrar no home:</b> {{ note.get_show_on_home_display }}
+      </div>
+    </div>
+
+    <div class="row">
+      <div class="small-12 columns">
+        {{ note.get_text_display }}
+      </div>
+    </div>
+  </section>
+{% endblock %}

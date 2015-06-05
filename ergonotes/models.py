@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from django.conf import settings
+from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
@@ -64,7 +65,7 @@ class Note(models.Model):
         return self.title
 
     def get_absolute_url(self):
-        return ''
+        return reverse('ergonotes:note', args=(self.pk,))
 
     def get_count(self):
         return markup_count[self.markup](self.text)
