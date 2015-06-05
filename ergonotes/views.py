@@ -22,10 +22,16 @@ from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse_lazy
 from django.http import HttpResponse, HttpResponseRedirect
+from django.views import generic
 from ergo.views import LoginRequiredMixin
 from userviews import views as userviews
 
 from . import models
+
+
+class IndexView(LoginRequiredMixin, generic.RedirectView):
+    permanent = False
+    url = reverse_lazy('ergonotes:note_list')
 
 
 # Note

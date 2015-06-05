@@ -25,3 +25,4 @@ class ErgoNotesConfig(AppConfig):
     name = 'ergonotes'
     verbose_name = 'Ergo Notes'
     ergo_url = 'ergonotes'
+    ergo_index = 'ergonotes:note_list'
