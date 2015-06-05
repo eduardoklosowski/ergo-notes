@@ -31,3 +31,10 @@ class ErgoNotesConfig(AppConfig):
         ('Listar Notas', reverse_lazy('ergonotes:note_list')),
         ('Nova Nota', reverse_lazy('ergonotes:note_add')),
     )
+
+    def ergo_notify(self, request):
+        return [{'url': n.get_absolute_url(),
+                 'title': 'Nota: %s' % n,
+                 'count': n.get_count(),
+                 'text': n.get_text_display()}
+                for n in self.get_model('Note').objects.show_on_home(request.user)]
