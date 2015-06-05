@@ -26,6 +26,7 @@ from . import views
 url_list = [
     url(r'^list/$', views.NoteListView.as_view(), name='note_list'),
     url(r'^(?P<pk>\d+)/$', views.NoteDetailView.as_view(), name='note'),
+    url(r'^add/$', views.NoteCreateView.as_view(), name='note_add'),
 ]
 
 urlpatterns = [

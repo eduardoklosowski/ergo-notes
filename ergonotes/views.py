@@ -34,3 +34,8 @@ class NoteListView(LoginRequiredMixin, userviews.UserListView):
 
 class NoteDetailView(LoginRequiredMixin, userviews.UserDetailView):
     model = models.Note
+
+
+class NoteCreateView(LoginRequiredMixin, userviews.UserCreateView):
+    model = models.Note
+    fields = ('user', 'priority', 'title', 'show_on_home', 'markup', 'text')

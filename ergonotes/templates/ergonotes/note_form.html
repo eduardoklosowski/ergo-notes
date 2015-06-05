@@ -1,0 +1,52 @@
+{% extends 'ergonotes/base.html' %}
+{% load foundation %}
+
+
+{% block title %}Nova Nota - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+  <section class="content" role="application">
+    <form method="post">
+      {% csrf_token %}
+      {% foundation_form_hiddens form %}
+      {% foundation_form_errors form %}
+      <div class="row">
+        <div class="small-12 columns">
+          <h1>Nova Nota</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-12 columns">
+          {% foundation_form_field form.title %}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-6 medium-4 columns">
+          {% foundation_form_field form.priority %}
+        </div>
+        <div class="small-6 medium-4 columns">
+          {% foundation_form_field form.show_on_home %}
+        </div>
+        <div class="small-12 medium-4 columns">
+          {% foundation_form_field form.markup %}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-12 columns">
+          {% foundation_form_field form.text %}
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-12 columns small-text-center medium-text-right">
+          <a class="button secondary" href="{% url 'ergonotes:note_list' %}">Cancelar</a>
+          <button type="submit">Salvar</button>
+        </div>
+      </div>
+    </form>
+  </section>
+{% endblock %}
