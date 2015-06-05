@@ -1,0 +1,25 @@
+{% extends 'ergonotes/base.html' %}
+
+
+{% block title %}{{ note }} - {{ block.super }}{% endblock %}
+
+
+{% block content %}
+  <section class="content" role="application">
+    <form method="post">
+      {% csrf_token %}
+      <div class="row">
+        <div class="small-12 text-center">
+          <h1>Apagar nota "{{ note }}"?</h1>
+        </div>
+      </div>
+
+      <div class="row">
+        <div class="small-12 text-center">
+          <a class="button secondary" href="{{ note.get_absolute_url }}">Cancelar</a>
+          <button class="alert" type="submit">Apagar</button>
+        </div>
+      </div>
+    </form>
+  </section>
+{% endblock %}

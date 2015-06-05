@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+from django.core.urlresolvers import reverse_lazy
 from ergo.views import LoginRequiredMixin
 from userviews import views as userviews
 
@@ -44,3 +45,8 @@ class NoteCreateView(LoginRequiredMixin, userviews.UserCreateView):
 class NoteUpdateView(LoginRequiredMixin, userviews.UserUpdateView):
     model = models.Note
     fields = ('priority', 'title', 'show_on_home', 'markup', 'text')
+
+
+class NoteDeleteView(LoginRequiredMixin, userviews.UserDeleteView):
+    model = models.Note
+    success_url = reverse_lazy('ergonotes:note_list')

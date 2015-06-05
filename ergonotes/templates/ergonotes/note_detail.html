@@ -41,6 +41,7 @@
 
     <div class="row">
       <div class="small-12 columns small-text-center medium-text-right">
+        <a class="button small alert fi-trash" href="{% url 'ergonotes:note_delete' note.pk %}" title="Apagar"></a>
         <a class="button small fi-pencil" href="{% url 'ergonotes:note_edit' note.pk %}" title="Editar"></a>
       </div>
     </div>
