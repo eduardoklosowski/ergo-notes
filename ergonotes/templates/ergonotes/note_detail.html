@@ -40,6 +40,12 @@
     </div>
 
     <div class="row">
+      <div class="small-12 columns small-text-center medium-text-right">
+        <a class="button small fi-pencil" href="{% url 'ergonotes:note_edit' note.pk %}" title="Editar"></a>
+      </div>
+    </div>
+
+    <div class="row">
       <div class="small-12 columns">
         {{ note.get_text_display }}
       </div>
