@@ -61,6 +61,15 @@ except ImportError:
     pass
 
 
+# Textile
+
+try:
+    from textile import textile
+    choices_markup.append(('textile', 'Textile', lambda x: mark_safe(textile(x))))
+except ImportError:
+    pass
+
+
 # Funções markup
 
 markup_function = {i[0]: i[2] for i in choices_markup}

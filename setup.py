@@ -21,6 +21,7 @@ setup(
     extras_require={
         'rst': ['docutils'],
         'md': ['Markdown'],
+        'textile': ['textile'],
     },
 
     author='Eduardo Augusto Klosowski',
