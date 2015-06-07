@@ -20,6 +20,7 @@ setup(
 
     extras_require={
         'rst': ['docutils'],
+        'md': ['Markdown'],
     },
 
     author='Eduardo Augusto Klosowski',

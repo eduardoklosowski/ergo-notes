@@ -52,6 +52,15 @@ except ImportError:
     pass
 
 
+# Markdown
+
+try:
+    from markdown import markdown
+    choices_markup.append(('mk', 'Markdown', lambda x: mark_safe(markdown(x))))
+except ImportError:
+    pass
+
+
 # Funções markup
 
 markup_function = {i[0]: i[2] for i in choices_markup}
