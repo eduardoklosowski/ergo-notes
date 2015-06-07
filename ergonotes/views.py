@@ -21,7 +21,7 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse_lazy
-from django.http import HttpResponseRedirect
+from django.http import HttpResponse, HttpResponseRedirect
 from ergo.views import LoginRequiredMixin
 from userviews import views as userviews
 
@@ -63,3 +63,22 @@ class NoteChangeShowOnHomeView(LoginRequiredMixin, userviews.UserDetailView):
 
         url = request.META.get('HTTP_REFERER', note.get_absolute_url())
         return HttpResponseRedirect(url)
+
+
+class NoteExportView(LoginRequiredMixin, userviews.UserDetailView):
+    model = models.Note
+
+    def get(self, request, *args, **kwargs):
+        note = self.get_object()
+        if kwargs.get('format', 'raw') == 'raw':
+            content_type = 'text/plain'
+            file_type = note.markup
+            text = note.text
+        else:
+            content_type = 'text/html'
+            file_type = 'html'
+            text = note.get_text_display()
+
+        response = HttpResponse(text, content_type=content_type)
+        response['Content-Disposition'] = 'attachment; filename="%s.%s"' % (note, file_type)
+        return response

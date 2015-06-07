@@ -30,6 +30,7 @@ url_list = [
     url(r'^(?P<pk>\d+)/edit/$', views.NoteUpdateView.as_view(), name='note_edit'),
     url(r'^(?P<pk>\d+)/delete/$', views.NoteDeleteView.as_view(), name='note_delete'),
     url(r'^(?P<pk>\d+)/changeonhome/$', views.NoteChangeShowOnHomeView.as_view(), name='note_changeonhome'),
+    url(r'^(?P<pk>\d+)/export/(?P<format>\w+)/$', views.NoteExportView.as_view(), name='note_export'),
 ]
 
 urlpatterns = [
