@@ -38,16 +38,24 @@ choices_markup = [
 # reStructuredText
 
 try:
-    from docutils.core import publish_parts
+    from docutils.core import publish_doctree, publish_parts
     docutils_settings = {
         'raw_enabled': False,
         'file_insertion_enabled': False,
     }
     docutils_settings.update(getattr(settings, 'RESTRUCTUREDTEXT_FILTER_SETTINGS', {}))
+
+    def rst_count(text):
+        tree = publish_doctree(text)
+        if tree.children[0].tagname == 'bullet_list':
+            return len(tree.asdom().getElementsByTagName('list_item'))
+        return None
+
     choices_markup.append(('rst', 'reStructuredText',
                            lambda x: mark_safe(publish_parts(source=x,
                                                              writer_name='html4css1',
-                                                             settings_overrides=docutils_settings)['fragment'])))
+                                                             settings_overrides=docutils_settings)['fragment']),
+                           rst_count))
 except ImportError:
     pass
 
