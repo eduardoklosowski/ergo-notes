@@ -20,6 +20,7 @@
 
 from __future__ import unicode_literals
 
+from django.conf import settings
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
 from django.utils.safestring import mark_safe
@@ -32,6 +33,23 @@ choices_markup = [
     ('html', 'HTML',
      lambda x: mark_safe(x)),
 ]
+
+
+# reStructuredText
+
+try:
+    from docutils.core import publish_parts
+    docutils_settings = {
+        'raw_enabled': False,
+        'file_insertion_enabled': False,
+    }
+    docutils_settings.update(getattr(settings, 'RESTRUCTUREDTEXT_FILTER_SETTINGS', {}))
+    choices_markup.append(('rst', 'reStructuredText',
+                           lambda x: mark_safe(publish_parts(source=x,
+                                                             writer_name='html4css1',
+                                                             settings_overrides=docutils_settings)['fragment'])))
+except ImportError:
+    pass
 
 
 # Funções markup

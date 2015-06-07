@@ -18,6 +18,10 @@ setup(
         'ergo',
     ],
 
+    extras_require={
+        'rst': ['docutils'],
+    },
+
     author='Eduardo Augusto Klosowski',
     author_email='eduardo_klosowski@yahoo.com',
 
