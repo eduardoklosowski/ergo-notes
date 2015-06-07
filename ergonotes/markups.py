@@ -22,12 +22,15 @@ from __future__ import unicode_literals
 
 from django.template.defaultfilters import linebreaksbr
 from django.utils.html import escape
+from django.utils.safestring import mark_safe
 
 
 choices_markup = [
     ('txt', 'Texto',
      lambda x: linebreaksbr(escape(x)),
      lambda x: len([i for i in x.splitlines() if i])),
+    ('html', 'HTML',
+     lambda x: mark_safe(x)),
 ]
 
 
