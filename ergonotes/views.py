@@ -21,6 +21,7 @@
 from __future__ import unicode_literals
 
 from django.core.urlresolvers import reverse_lazy
+from django.http import HttpResponseRedirect
 from ergo.views import LoginRequiredMixin
 from userviews import views as userviews
 
@@ -50,3 +51,15 @@ class NoteUpdateView(LoginRequiredMixin, userviews.UserUpdateView):
 class NoteDeleteView(LoginRequiredMixin, userviews.UserDeleteView):
     model = models.Note
     success_url = reverse_lazy('ergonotes:note_list')
+
+
+class NoteChangeShowOnHomeView(LoginRequiredMixin, userviews.UserDetailView):
+    model = models.Note
+
+    def get(self, request, *args, **kwargs):
+        note = self.get_object()
+        note.show_on_home = not note.show_on_home
+        note.save()
+
+        url = request.META.get('HTTP_REFERER', note.get_absolute_url())
+        return HttpResponseRedirect(url)

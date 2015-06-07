@@ -24,6 +24,7 @@ from django.conf import settings
 from django.core.urlresolvers import reverse
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
+from django.utils.safestring import mark_safe
 
 from . import managers
 from .markups import choices_markup, markup_count, markup_function
@@ -75,6 +76,12 @@ class Note(models.Model):
             return 'Sim'
         else:
             return 'Não'
+
+    def get_show_on_home_linkdisplay(self):
+        return mark_safe('<a href="%s">%s</a>' % (
+            reverse('ergonotes:note_changeonhome', args=(self.pk,)),
+            self.get_show_on_home_display()
+        ))
 
     def get_text_display(self):
         return markup_function[self.markup](self.text)

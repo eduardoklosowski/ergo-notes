@@ -29,6 +29,7 @@ url_list = [
     url(r'^add/$', views.NoteCreateView.as_view(), name='note_add'),
     url(r'^(?P<pk>\d+)/edit/$', views.NoteUpdateView.as_view(), name='note_edit'),
     url(r'^(?P<pk>\d+)/delete/$', views.NoteDeleteView.as_view(), name='note_delete'),
+    url(r'^(?P<pk>\d+)/changeonhome/$', views.NoteChangeShowOnHomeView.as_view(), name='note_changeonhome'),
 ]
 
 urlpatterns = [
