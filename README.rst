@@ -6,6 +6,15 @@ Ergo Notes
 Este pacote é o aplicativo de notas para o Ergo_.
 
 
+Instalação
+----------
+
+- Adicione `ergonotes` em `INSTALLED_APPS` no arquivo `settings.py`.
+- Execute o `migration`::
+
+    python manage.py migrate
+
+
 Licença
 -------
 
