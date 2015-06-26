@@ -24,6 +24,7 @@ from django.conf import settings
 from django.db import models
 from django.utils.encoding import python_2_unicode_compatible
 
+from . import managers
 from .markups import choices_markup, markup_count, markup_function
 
 
@@ -50,6 +51,8 @@ class Note(models.Model):
     modify_on = models.DateTimeField('atualizado em', auto_now=True)
     markup = models.CharField('markup', max_length=8, default='txt', choices=CHOICES_NOTE_MARKUP)
     text = models.TextField('texto', blank=True)
+
+    objects = managers.NoteManager()
 
     class Meta:
         ordering = ('user', '-priority', 'title')
